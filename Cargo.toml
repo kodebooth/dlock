@@ -1,0 +1,26 @@
+[package]
+description = "A lease based distributed lock with support for fencing tokens"
+edition = "2024"
+homepage = "https://github.com/kodebooth/dlock"
+license-file = "LICENSE"
+name = "dlock"
+readme = "README.md"
+repository = "https://github.com/kodebooth/dlock"
+version = "0.1.0"
+
+[features]
+default = ["dynamodb"]
+dynamodb = ["dep:aws-config", "dep:aws-sdk-dynamodb", "dep:serde_dynamo"]
+
+[dependencies]
+aws-config = { version = "1.1", features = ["behavior-version-latest"], optional = true}
+aws-sdk-dynamodb = {version = "1.98", optional = true }
+bon = "3.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_dynamo = { version = "4", features = ["aws-sdk-dynamodb+1"], optional = true }
+thiserror = "2.0"
+tokio = { version = "1.48", features = ["macros"] }
+uuid = { version = "1.18", features = ["v4", "serde"] }
+
+[dev-dependencies]
+testcontainers-modules = { version = "0.13", features = ["dynamodb"] }
