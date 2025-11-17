@@ -6,7 +6,7 @@ license = "MIT"
 name = "dlock"
 readme = "README.md"
 repository = "https://github.com/kodebooth/dlock"
-version = "0.1.0"
+version = "0.1.1"
 
 [features]
 default = ["dynamodb"]
