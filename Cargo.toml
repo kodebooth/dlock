@@ -2,6 +2,7 @@
 description = "A lease based distributed lock with support for fencing tokens"
 edition = "2024"
 homepage = "https://github.com/kodebooth/dlock"
+keywords = ["distributed", "locking", "dynamodb", "lease"]
 license = "MIT"
 name = "dlock"
 readme = "README.md"
