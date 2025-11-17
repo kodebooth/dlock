@@ -81,7 +81,7 @@ sequenceDiagram
         P ->> B: Failure (uuid=A1, duration=D1)
     end
 
-    B ->> P: Acquire (prev_uuid=Am, new_uuid=B1, duration=D2)
+    B ->> P: Acquire (prev_uuid=A1, new_uuid=B1, duration=D2)
     P ->> B: Acquired (uuid=B1, duration=D2, token=1)
 
     B ->> B: Synchronized Work
@@ -128,7 +128,7 @@ sequenceDiagram
 
     A ->> S: Synchronized Work (token=0)
     S ->> S: Token Invalid 0 < 1
-    S ->> B: Failure (token=0)
+    S ->> A: Failure (token=0)
 
     A ->> P: Release (uuid=A1)
     P ->> A: Already Released ()
