@@ -14,7 +14,7 @@ default = ["dynamodb"]
 dynamodb = ["dep:aws-config", "dep:aws-sdk-dynamodb", "dep:serde_dynamo"]
 
 [dependencies]
-aws-config = { version = "1.1", features = ["behavior-version-latest"], optional = true}
+aws-config = { version = "1.8", features = ["behavior-version-latest"], optional = true}
 aws-sdk-dynamodb = {version = "1.98", optional = true }
 bon = "3.8"
 serde = { version = "1.0", features = ["derive"] }
