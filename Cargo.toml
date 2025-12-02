@@ -27,5 +27,5 @@ uuid = { version = "1.18", features = ["v4", "serde"] }
 [dev-dependencies]
 console-subscriber = "0.5.0"
 rand = "0.9.2"
-testcontainers-modules = { version = "0.13", features = ["dynamodb"] }
+testcontainers-modules = { version = "0.14", features = ["dynamodb"] }
 tracing-subscriber = "0.3.20"
