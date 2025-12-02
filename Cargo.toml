@@ -22,7 +22,7 @@ serde_dynamo = { version = "4", features = ["aws-sdk-dynamodb+1"], optional = tr
 thiserror = "2.0"
 tokio = { version = "1.48", features = ["full", "tracing"] }
 tracing = "0.1.41"
-uuid = { version = "1.18", features = ["v4", "serde"] }
+uuid = { version = "1.19", features = ["v4", "serde"] }
 
 [dev-dependencies]
 console-subscriber = "0.5.0"
