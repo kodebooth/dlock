@@ -10,12 +10,12 @@ pub mod dynamodb;
 
 /// `Provider` is a trait that abstracts the backend specific details of the
 /// lock acquisition mechanism.
-pub trait Provider: Clone {
+#[trait_variant::make(Provider: Send)]
+pub trait LocalProvider: Clone {
     type T;
     type L: Lease<Self::L, Self::T>;
     type R: Clone;
 
-    #[allow(async_fn_in_trait)]
     async fn acquire(
         &self,
         name: &str,
@@ -27,10 +27,9 @@ pub trait Provider: Clone {
 
 /// `Lease` is a trait that abstracts the backend specific details of the
 /// lock renewal and release mechanism.
-pub trait Lease<L, T>: Debug {
-    #[allow(async_fn_in_trait)]
+#[trait_variant::make(Lease: Send)]
+pub trait LocalLease<L, T>: Debug {
     async fn release(&self) -> Result<(), DLockError>;
-    #[allow(async_fn_in_trait)]
     async fn renew(&self) -> Result<L, DLockError>;
 
     fn token(&self) -> T;
