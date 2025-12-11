@@ -66,7 +66,7 @@ async fn setup() -> (ContainerAsync<DynamoDb>, DynamodbProvider) {
         .expect("should be able to create table");
 
     let provider = DynamodbProvider::builder()
-        .client(Arc::new(client))
+        .client(client)
         .table_name(TABLE_NAME.to_string())
         .build();
 
