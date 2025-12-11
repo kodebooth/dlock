@@ -15,7 +15,6 @@
 //! [DLock::with] will acquire, automatically renew, and release the lease. For more information see the function documentation.
 //! ```rust,no_run
 //! use dlock::{DLock, DynamodbProvider};
-//! use std::sync::Arc;
 //! use std::time::Duration;
 //!
 //! const TABLE_NAME: &str = "dynamodb_table";
@@ -25,7 +24,7 @@
 //!     let config = aws_sdk_dynamodb::config::Builder::new().build();
 //!     let client = aws_sdk_dynamodb::Client::from_conf(config);
 //!     let provider = DynamodbProvider::builder()
-//!         .client(Arc::new(client))
+//!         .client(client)
 //!         .table_name(TABLE_NAME.to_string())
 //!         .build();
 //!
@@ -46,7 +45,6 @@
 //! You are responsible for acquiring, renewing, and releasing the lease.
 //! ```rust,no_run
 //! use dlock::{DLock, DynamodbProvider, Lease};
-//! use std::sync::Arc;
 //! use std::time::Duration;
 //! use std::error::Error;
 //!
@@ -57,7 +55,7 @@
 //!     let config = aws_sdk_dynamodb::config::Builder::new().build();
 //!     let client = aws_sdk_dynamodb::Client::from_conf(config);
 //!     let provider = DynamodbProvider::builder()
-//!         .client(Arc::new(client))
+//!         .client(client)
 //!         .table_name(TABLE_NAME.to_string())
 //!         .build();
 //!

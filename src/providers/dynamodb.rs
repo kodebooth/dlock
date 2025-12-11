@@ -3,7 +3,6 @@
 
 use std::{
     collections::HashMap,
-    sync::Arc,
     time::{Duration, Instant},
 };
 
@@ -31,7 +30,7 @@ use crate::{
 /// [DynamoDB](aws_sdk_dynamodb) provider for [DLock](crate::DLock) implementation
 #[derive(Builder, Debug, Clone)]
 pub struct DynamodbProvider {
-    client: Arc<Client>,
+    client: Client,
     table_name: String,
 }
 
@@ -83,7 +82,7 @@ impl DynamodbProvider {
             })?;
         Ok(DynamodbLease {
             item: lock,
-            client: Arc::clone(&self.client),
+            client: self.client.clone(),
             table: self.table_name.clone(),
         })
     }
@@ -134,7 +133,7 @@ impl DynamodbProvider {
 
         Ok(DynamodbLease {
             item,
-            client: Arc::clone(&self.client),
+            client: self.client.clone(),
             table: self.table_name.clone(),
         })
     }
@@ -187,7 +186,7 @@ struct DynamodbLockItem {
 #[derive(Debug, Clone)]
 pub struct DynamodbLease {
     item: DynamodbLockItem,
-    client: Arc<Client>,
+    client: Client,
     table: String,
 }
 
@@ -253,7 +252,7 @@ impl Lease<Self, u64> for DynamodbLease {
 
         Ok(DynamodbLease {
             item,
-            client: Arc::clone(&self.client),
+            client: self.client.clone(),
             table: self.table.clone(),
         })
     }
@@ -349,7 +348,7 @@ mod tests {
         let (_db, client) = setup().await;
 
         let provider = DynamodbProvider::builder()
-            .client(Arc::new(client))
+            .client(client)
             .table_name(TABLE_NAME.to_string())
             .build();
 
@@ -367,7 +366,7 @@ mod tests {
         let (_db, client) = setup().await;
 
         let provider = DynamodbProvider::builder()
-            .client(Arc::new(client))
+            .client(client)
             .table_name(TABLE_NAME.to_string())
             .build();
 
@@ -392,7 +391,7 @@ mod tests {
         let (_db, client) = setup().await;
 
         let provider = DynamodbProvider::builder()
-            .client(Arc::new(client))
+            .client(client)
             .table_name(TABLE_NAME.to_string())
             .build();
 
@@ -428,7 +427,7 @@ mod tests {
         let (_db, client) = setup().await;
 
         let provider = DynamodbProvider::builder()
-            .client(Arc::new(client))
+            .client(client)
             .table_name(TABLE_NAME.to_string())
             .build();
 
