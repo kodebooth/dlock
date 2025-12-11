@@ -145,7 +145,11 @@ where
     /// be detected using the fencing token.
     /// </div>
     ///
-    pub async fn with<R>(&self, mut f: impl AsyncFnMut(A::T) -> R) -> Result<R, DLockError> {
+    pub async fn with<R, F>(&self, mut f: F) -> Result<R, DLockError>
+    where
+        F: AsyncFnMut(A::T) -> R,
+        R: Send,
+    {
         let mut retry = None;
         let lease = loop {
             match self.acquire_or_retry(retry.clone()).await {
